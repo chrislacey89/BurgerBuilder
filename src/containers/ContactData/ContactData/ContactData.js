@@ -11,26 +11,25 @@ class ContactData extends Component {
     email: "",
     address: {
       street: "",
-      zipCode: ""
+      postalCode: ""
     },
     loading: false
   };
 
-  orderHandler = e => {
-    e.preventDefault();
-    console.log(this.props.ingredients);
+  orderHandler = event => {
+    event.preventDefault();
     this.setState({ loading: true });
     const order = {
-      ingredients: this.state.ingredients,
+      ingredients: this.props.ingredients,
       price: this.props.price,
       customer: {
-        name: "Chris Lacey",
+        name: "Max Schwarzmüller",
         address: {
-          street: "Test Ave 1",
-          zipcode: 47401,
-          country: "USA"
+          street: "Teststreet 1",
+          zipCode: "41351",
+          country: "Germany"
         },
-        email: "test@gmail.com"
+        email: "test@test.com"
       },
       deliveryMethod: "fastest"
     };
@@ -44,9 +43,10 @@ class ContactData extends Component {
         this.setState({ loading: false });
       });
   };
+
   render() {
     let form = (
-      <form action="">
+      <form>
         <input
           className={classes.Input}
           type="text"
@@ -55,7 +55,7 @@ class ContactData extends Component {
         />
         <input
           className={classes.Input}
-          type="text"
+          type="email"
           name="email"
           placeholder="Your Mail"
         />
@@ -68,8 +68,8 @@ class ContactData extends Component {
         <input
           className={classes.Input}
           type="text"
-          name="zip"
-          placeholder="Zip"
+          name="postal"
+          placeholder="Postal Code"
         />
         <Button btnType="Success" clicked={this.orderHandler}>
           ORDER
@@ -79,7 +79,6 @@ class ContactData extends Component {
     if (this.state.loading) {
       form = <Spinner />;
     }
-
     return (
       <div className={classes.ContactData}>
         <h4>Enter your Contact Data</h4>
