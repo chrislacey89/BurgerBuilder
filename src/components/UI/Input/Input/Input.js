@@ -10,14 +10,9 @@ const input = props => {
       inputElement = (
         <input
           className={classes.InputElement}
-<<<<<<< HEAD
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
-=======
-          {...props}
-          {...props.elementConfig}
->>>>>>> 8152351da90217411a6c6bcad45eafe36d145ad6
         />
       );
       break;
@@ -25,7 +20,6 @@ const input = props => {
       inputElement = (
         <textarea
           className={classes.InputElement}
-<<<<<<< HEAD
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
@@ -46,25 +40,14 @@ const input = props => {
           ))}
         </select>
       );
-=======
-          {...props}
-          {...props.elementConfig}
-        />
-      );
->>>>>>> 8152351da90217411a6c6bcad45eafe36d145ad6
       break;
     default:
       inputElement = (
         <input
           className={classes.InputElement}
-<<<<<<< HEAD
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
-=======
-          {...props}
-          {...props.elementConfig}
->>>>>>> 8152351da90217411a6c6bcad45eafe36d145ad6
         />
       );
   }

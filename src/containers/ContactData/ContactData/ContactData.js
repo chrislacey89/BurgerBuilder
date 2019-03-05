@@ -67,6 +67,7 @@ class ContactData extends Component {
     event.preventDefault();
     this.setState({ loading: true });
     const formData = {};
+    // loop through form
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[
         formElementIdentifier
@@ -74,12 +75,8 @@ class ContactData extends Component {
     }
     const order = {
       ingredients: this.props.ingredients,
-<<<<<<< HEAD
       price: this.props.price,
       orderData: formData
-=======
-      price: this.props.price
->>>>>>> 8152351da90217411a6c6bcad45eafe36d145ad6
     };
     axios
       .post("/orders.json", order)
@@ -115,7 +112,6 @@ class ContactData extends Component {
       });
     }
     let form = (
-<<<<<<< HEAD
       <form onSubmit={this.orderHandler}>
         {formElementsArray.map(formElement => (
           <Input
@@ -127,31 +123,6 @@ class ContactData extends Component {
           />
         ))}
         <Button btnType="Success">ORDER</Button>
-=======
-      <form>
-        <Input inputtype="..." type="..." name="..." placeholder="..." />
-        <Input
-          inputtype="input"
-          type="email"
-          name="email"
-          placeholder="Your Mail"
-        />
-        <Input
-          inputtype="input"
-          type="text"
-          name="street"
-          placeholder="Street"
-        />
-        <Input
-          inputtype="input"
-          type="text"
-          name="postal"
-          placeholder="Postal Code"
-        />
-        <Button btnType="Success" clicked={this.orderHandler}>
-          ORDER
-        </Button>
->>>>>>> 8152351da90217411a6c6bcad45eafe36d145ad6
       </form>
     );
     if (this.state.loading) {
