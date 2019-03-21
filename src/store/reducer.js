@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
           ...state.ingredients,
           // [whatever we receive as a payload of the action will receive a new value]
           // with : we set the new value
-          [action.ingredientName]: state.ingredients[action.ingredientName + 1]
+          [action.ingredientName]: state.ingredients[action.ingredientName] + 1
         },
         totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
       };
@@ -39,7 +39,7 @@ const reducer = (state = initialState, action) => {
           ...state.ingredients,
           // [whatever we receive as a payload of the action will receive a new value]
           // with : we set the new value
-          [action.ingredientName]: state.ingredients[action.ingredientName - 1]
+          [action.ingredientName]: state.ingredients[action.ingredientName] - 1
         },
         totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
       };
