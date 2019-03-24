@@ -6,7 +6,6 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import classes from "./ContactData.module.css";
 import axios from "../../../axios-orders";
 import Input from "../../../components/UI/Input/Input/Input";
-import input from "../../../components/UI/Input/Input/Input";
 
 class ContactData extends Component {
   state = {
