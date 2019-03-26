@@ -1,13 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  ingredients: {
-    salad: 0,
-    bacon: 0,
-    cheese: 0,
-    meat: 0
-  },
-  totalPrice: 4
+  ingredients: null,
+  totalPrice: 4,
+  error: false
 };
 
 const INGREDIENT_PRICES = {
@@ -23,10 +19,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ingredients: {
-          // this clone goes even deeper to access ingredients
           ...state.ingredients,
-          // [whatever we receive as a payload of the action will receive a new value]
-          // with : we set the new value
           [action.ingredientName]: state.ingredients[action.ingredientName] + 1
         },
         totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
@@ -35,13 +28,26 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         ingredients: {
-          // this clone goes even deeper to access ingredients
           ...state.ingredients,
-          // [whatever we receive as a payload of the action will receive a new value]
-          // with : we set the new value
           [action.ingredientName]: state.ingredients[action.ingredientName] - 1
         },
         totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+      };
+    case actionTypes.SET_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: {
+          salad: action.ingredients.salad,
+          bacon: action.ingredients.bacon,
+          cheese: action.ingredients.cheese,
+          meat: action.ingredients.meat
+        },
+        error: false
+      };
+    case actionTypes.FETCH_INGREDIENTS_FAILED:
+      return {
+        ...state,
+        error: true
       };
     default:
       return state;
