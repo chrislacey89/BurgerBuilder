@@ -1,7 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-orders";
 
-// synchronos functions
 export const purchaseBurgerSuccess = (id, orderData) => {
   return {
     type: actionTypes.PURCHASE_BURGER_SUCCESS,
@@ -17,14 +16,13 @@ export const purchaseBurgerFail = error => {
   };
 };
 
-// a synchronous functions
-// export const purchaseBurgerStart = () => {
-//   return {
-//     type: actionTypes.PURCHASE_BURGER_START
-//   };
-// };
+export const purchaseBurgerStart = () => {
+  return {
+    type: actionTypes.PURCHASE_BURGER_START
+  };
+};
 
-export const purchaseBurgerStart = orderData => {
+export const purchaseBurger = orderData => {
   return dispatch => {
     dispatch(purchaseBurgerStart());
     axios
