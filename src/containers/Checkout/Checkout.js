@@ -40,7 +40,7 @@ class Checkout extends Component {
 // this connects to reducer
 const mapStateToProps = state => {
   return {
-    ings: state.ingredients
+    ings: state.burgerBuilder.ingredients
   };
 };
 

@@ -18,19 +18,19 @@ export const purchaseBurgerFail = error => {
 };
 
 // a synchronous functions
-// export const purchaseBurgerStart = () => {
-//   return {
-//     type: actionTypes.PURCHASE_BURGER_START
-//   };
-// };
+export const purchaseBurgerStart = () => {
+  return {
+    type: actionTypes.PURCHASE_BURGER_START
+  };
+};
 
-export const purchaseBurgerStart = orderData => {
+export const purchaseBurger = orderData => {
   return dispatch => {
     dispatch(purchaseBurgerStart());
     axios
       .post("/orders.json", orderData)
       .then(response => {
-        console.log(response.data);
+        console.log(response.data.name);
         dispatch(purchaseBurgerSuccess(response.data, orderData));
       })
       .catch(error => {
