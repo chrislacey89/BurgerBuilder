@@ -8,6 +8,12 @@ const intitialState = {
 
 export const reducer = (state = intitialState, action) => {
   switch (action.type) {
+    case actionTypes.PURCHASE_INIT:
+      return {
+        ...state,
+        purchased: false
+      };
+
     case actionTypes.PURCHASE_BURGER_START:
       return {
         ...state,
@@ -22,6 +28,7 @@ export const reducer = (state = intitialState, action) => {
       return {
         ...state,
         loading: false,
+        purchased: true,
         orders: state.orders.concat(newOrder)
       };
     case actionTypes.PURCHASE_BURGER_FAIL:
