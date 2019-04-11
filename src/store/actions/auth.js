@@ -8,10 +8,11 @@ export const authStart = () => {
   };
 };
 
-export const authSucess = authData => {
+export const authSucess = (token, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    authData: authData
+    idToken: token,
+    userID: userId
   };
 };
 
@@ -62,7 +63,7 @@ export const auth = (email, password) => {
       )
       .then(response => {
         console.log(response);
-        dispatch(authSucess(response.data));
+        dispatch(authSucess(response.data.idToken, response.data.localId));
       })
       .catch(err => {
         console.log(authData);
