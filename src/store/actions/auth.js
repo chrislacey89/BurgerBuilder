@@ -8,11 +8,11 @@ export const authStart = () => {
   };
 };
 
-export const authSucess = (token, userId) => {
+export const authSuccess = (token, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
-    userID: userId
+    userId: userId
   };
 };
 
@@ -23,32 +23,21 @@ export const authFail = error => {
   };
 };
 
-// a sync code
+export const logout = () => {
+  return {
+    type: actionTypes.AUTH_LOGOUT
+  };
+};
 
-// export const auth = (email, password) => {
-//   return dispatch => {
-//     dispatch(authStart());
-//     const authData = {
-//       email: email,
-//       password: password,
-//       returnSecureToken: true
-//     };
-//     axios
-//       .post(
-//         "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyCustomToken?key=AIzaSyCGWszuKAFC_ak3WJpzSrr2QR8biH59Eig",
-//         authData
-//       )
-//       .then(response => {
-//         console.log(response);
-//         dispatch(authSucess(response.data));
-//       })
-//       .catch(err => {
-//         dispatch(authFail(err));
-//       });
-//   };
-// };
+export const checkAuthTimeout = expirationTime => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, expirationTime * 1000);
+  };
+};
 
-export const auth = (email, password) => {
+export const auth = (email, password, isSignup) => {
   return dispatch => {
     dispatch(authStart());
     const authData = {
@@ -56,18 +45,21 @@ export const auth = (email, password) => {
       password: password,
       returnSecureToken: true
     };
+    let url =
+      "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCGWszuKAFC_ak3WJpzSrr2QR8biH59Eig";
+    if (!isSignup) {
+      url =
+        "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCGWszuKAFC_ak3WJpzSrr2QR8biH59Eig";
+    }
     axios
-      .post(
-        "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCGWszuKAFC_ak3WJpzSrr2QR8biH59Eig",
-        authData
-      )
+      .post(url, authData)
       .then(response => {
         console.log(response);
-        dispatch(authSucess(response.data.idToken, response.data.localId));
+        dispatch(authSuccess(response.data.idToken, response.data.localId));
+        dispatch(checkAuthTimeout(response.data.expiresIn));
       })
       .catch(err => {
-        console.log(authData);
-        dispatch(authFail(err));
+        dispatch(authFail(err.response.data.error));
       });
   };
 };
